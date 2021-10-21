@@ -85,7 +85,9 @@ function getHashString(name) {
 }
 ```
 
-#### 版本号比较
+#### compareVersion
+
+> 字符串版本号比较
 
 ```javascript
 /* *
