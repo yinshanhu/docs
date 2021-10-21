@@ -23,7 +23,7 @@ function getCookie(name, cookieName) {
 
 > 加载第三方jssdk
 
-```typescript
+```javascript
 function promiseFactory(id: string, src: string) {
     if (id && src) {
         return new Promise((resolve, reject) => {
