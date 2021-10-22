@@ -1,6 +1,6 @@
 ## 基础
 
-#### getCookie
+### getCookie
 
 > 获取Cookie
 
@@ -19,7 +19,7 @@ function getCookie(name, cookieName) {
 }
 ```
 
-#### loadJs
+### loadJs
 
 > 加载第三方jssdk
 
@@ -51,7 +51,7 @@ function promiseFactory(id: string, src: string) {
 }
 ```
 
-#### getQueryString
+### getQueryString
 
 > 获取链接参数
 
@@ -64,7 +64,7 @@ function getQueryString(name) {
 }
 ```
 
-#### getHashString
+### getHashString
 
 > 获取hash后面的参数
 
@@ -85,7 +85,7 @@ function getHashString(name) {
 }
 ```
 
-#### 版本号比较
+### 版本号比较
 
 ```javascript
 /* *
@@ -127,7 +127,7 @@ function compareVersion(version1, version2) {
 }
 ```
 
-#### queryStringify
+### queryStringify
 
 > 对象转成字符串形式
 
@@ -158,7 +158,7 @@ function queryStringify(obj, prefix = null) {
 
 ## 网络请求
 
-#### post
+### post
 
 > 原生网络请求
 
@@ -184,7 +184,7 @@ function post(url, data, header = {}, fn) {
 
 ## 界面
 
-#### toast
+### toast
 
 > 原生网络请求
 
@@ -204,7 +204,7 @@ function toast(opt = {}){
 }
 ```
 
-#### alert
+### alert
 
 ```javascript
 function alert(opt = {}) {
