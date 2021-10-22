@@ -23,7 +23,7 @@ function getCookie(name, cookieName) {
 
 > 加载第三方jssdk
 
-```typescript
+```javascript
 function promiseFactory(id: string, src: string) {
     if (id && src) {
         return new Promise((resolve, reject) => {
@@ -85,7 +85,9 @@ function getHashString(name) {
 }
 ```
 
-### 版本号比较
+### compareVersion
+
+> 字符串版本号比较
 
 ```javascript
 /* *
