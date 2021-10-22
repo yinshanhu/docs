@@ -188,7 +188,7 @@ function post(url, data, header = {}, fn) {
 
 ### toast
 
-> 原生网络请求
+> taost弹窗
 
 ```javascript
 function toast(opt = {}){
@@ -207,6 +207,8 @@ function toast(opt = {}){
 ```
 
 ### alert
+
+> 确认弹窗
 
 ```javascript
 function alert(opt = {}) {
@@ -228,4 +230,52 @@ function alert(opt = {}) {
         }
     }
 }
+```
+
+## 设计模式
+
+### decorate
+
+> 装饰者
+
+```javascript
+let fuc = function handle() {
+
+    // 业务代码
+    // ... ...
+    console.log('业务代码')
+}
+
+// 声明
+fuc.decorate = function (beforefn, afterfn) {
+    const _self = this;
+    return function () {
+        beforefn.apply(this, arguments);
+        try {
+            _self.apply(this, arguments);
+        } catch (error) {
+            // 一般会记日志
+            throw error;
+        }
+        afterfn.apply(this, arguments);
+    };
+};
+const handleDecorate = fuc.decorate(() => {
+
+    // fuc 方法执行前需要执行的代码：
+    // ......
+
+}, () => {
+
+    // fuc 方法执行后需要执行的代码：
+    // ......
+
+});
+
+// （上下文）参数
+const CONTEXT = {
+    param1: '',
+    param2: ''
+}
+handleDecorate(CONTEXT);
 ```
