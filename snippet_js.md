@@ -238,6 +238,11 @@ const set = (obj, path, value) => {
 > 函数防抖
 
 ```javascript
+/**
+ * 函数防抖
+ * @param {*} fn 回调函数
+ * @param {Number} interval 间隔
+ */
 const debounce = (fn, interval) => {
     let timeid
 
