@@ -7,6 +7,7 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="./asset/themes/vue.css">
+  <link rel="stylesheet" href="./asset/themes/gitalk.css">
 </head>
 <body>
   <div id="app">正在登陆空间站。。。</div>
@@ -33,6 +34,15 @@
   <script src="./asset/lib/zoom-image.min.js"></script>
   <script src="./asset/lib/emoji.min.js"></script>
   <script src="./asset/lib/docsify-copy-code.min.js"></script>
-  <script src="./asset/lib/disqus.min.js"></script>
+  <script src="./asset/lib/gitalk.min.js"></script>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: '6c55b4f86c2fd694cec7',
+      clientSecret: '93d5a2b2ca00267134bbce9cdb81fbd48ef16980',
+      repo: 'git@github.com:yinshanhu/docs.git',
+      // facebook-like distraction free mode
+      distractionFreeMode: false
+    })
+  </script>
 </body>
 </html>
