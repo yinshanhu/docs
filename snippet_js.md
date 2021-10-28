@@ -314,6 +314,38 @@ const throttle = (func, wait, options) => {
 }
 ```
 
+## 时间
+
+### currentDateTime
+
+> 当前日期时间
+
+```javascript
+currentDateTime() {
+    let now = new Date(),
+        year = now.getFullYear(), //年
+        month = now.getMonth() + 1, //月
+        day = now.getDate(), //日
+        hh = now.getHours(), //时
+        mm = now.getMinutes(), //分
+        ss = now.getSeconds(), //秒
+        clock = year + "/";
+
+    if (month < 10) clock += "0";
+    clock += month + "/";
+    if (day < 10) clock += "0";
+    clock += day + " ";
+    if (hh < 10) clock += "0";
+    clock += hh + ":";
+    if (mm < 10) clock += "0";
+    clock += mm + ":";
+    if (ss < 10) clock += "0";
+    clock += ss;
+
+    return clock;
+}
+```
+
 ## 网络请求
 
 ### post
