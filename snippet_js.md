@@ -322,7 +322,7 @@ const throttle = (func, wait, options) => {
 
 ```javascript
 currentDateTime() {
-    let now = new Date(),
+    let now = time ? new Date(time) : new Date(),
         year = now.getFullYear(), //年
         month = now.getMonth() + 1, //月
         day = now.getDate(), //日
