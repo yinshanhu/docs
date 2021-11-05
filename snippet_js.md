@@ -314,6 +314,26 @@ const throttle = (func, wait, options) => {
 }
 ```
 
+### isCoincide
+
+> 判断两区间是否有交集（重合）
+
+```javascript
+/**
+ * 函数节流
+ * @param {Array} section1 区间1，示例：[12,56]
+ * @param {Array} section2 区间2，示例：[32,87]
+ */
+const isCoincide = (section1, section2) => {
+    let maxStart = [section1[0], section2[0]],
+        minEnd = [section1[1], section2[1]];
+    if (Math.max(...maxStart) <= Math.min(...minEnd)) {
+        return true; //有交集
+    }
+    return false;
+}
+```
+
 ## 时间
 
 ### currentDateTime
