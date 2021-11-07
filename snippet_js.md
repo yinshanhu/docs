@@ -334,6 +334,21 @@ const isCoincide = (section1, section2) => {
 }
 ```
 
+### deepCopy
+
+> 对象深拷贝
+
+```javascript
+//对象深拷贝
+const deepCopy = (obj) => {
+    var res = {};
+    for (var key in obj) {
+        res[key] = obj[key];
+    }
+    return res;
+}
+```
+
 ## 时间
 
 ### currentDateTime
