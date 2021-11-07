@@ -361,7 +361,7 @@ const deepCopy = (obj) => {
  */
 const uniqueItem = (objArray, byKey) => {
     let hash = {};
-    objArray = objArray.reduce(function (item, next) {
+    objArray = objArray.reduce( (item, next) => {
         hash[next[byKey]] ? '' : hash[next[byKey]] = true && item.push(next);
         return item;
     }, []);
