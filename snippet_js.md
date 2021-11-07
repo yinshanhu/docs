@@ -349,6 +349,26 @@ const deepCopy = (obj) => {
 }
 ```
 
+### uniqueItem
+
+> 对象数组去重
+
+```javascript
+/**
+ * 对象数组去重
+ * @param {Array} objArray 对象数组
+ * @param {String} byKey 去重对比key
+ */
+const uniqueItem = (objArray, byKey) => {
+    let hash = {};
+    objArray = objArray.reduce(function (item, next) {
+        hash[next[byKey]] ? '' : hash[next[byKey]] = true && item.push(next);
+        return item;
+    }, []);
+    return objArray;
+}
+```
+
 ## 时间
 
 ### currentDateTime
