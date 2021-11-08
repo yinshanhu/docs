@@ -369,6 +369,28 @@ const uniqueItem = (objArray, byKey) => {
 }
 ```
 
+### searchVal
+
+> 可用于验证对象中是否存在某值
+
+```javascript
+/**
+ * 查找对象中第一个value，并返回路径上所有key值
+ * @param {Object} object 对象: {a:{b:1},c:{d:{e:2},f:{g:{h:3,i:{j:4,k:5,m:6}}}}}
+ * @param {String} value 要查到的value：4
+ * @return {Arry} 查找到的路径：['c', 'f', 'g', 'i', 'j']
+ */
+const searchVal = (object, value) => {
+    for (let key in object) {
+        if (object[key] == value) return [key];
+        if (typeof object[key] == "object") {
+            let temp = searchVal(object[key], value);
+            if (temp) return [key, temp].flat(); // flat() 方法，这个方法可以抹平一个数组。不管嵌套了多少的数组，都会展开成为一个无嵌套数组
+        }
+    }
+}
+```
+
 ## 时间
 
 ### currentDateTime
