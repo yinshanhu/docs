@@ -341,11 +341,18 @@ const isCoincide = (section1, section2) => {
 ```javascript
 //对象深拷贝
 const deepCopy = (obj) => {
-    var res = {};
-    for (var key in obj) {
-        res[key] = obj[key];
-    }
-    return res;
+    if (obj == null) { return null } 
+    let result = Array.isArray(obj) ? [] : {}; 
+    for (let key in obj) { 
+        if (obj.hasOwnProperty(key)) { 
+            if (typeof obj[key] === 'object') { 
+                result[key] = deepCopy(obj[key]); // 如果是对象，再次调用该方法自身 
+            } else {
+                result[key] = obj[key]; 
+            } 
+        } 
+    } 
+    return result;
 }
 ```
 
