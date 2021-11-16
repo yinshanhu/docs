@@ -391,6 +391,62 @@ const searchVal = (object, value) => {
 }
 ```
 
+## 浮点计算
+
+### plus
+
+> 加 +
+
+```javascript
+const plus = (num1, num2) => {
+    const num1Digits = (num1.toString().split('.')[1] || '').length; // 小数点后几位
+    const num2Digits = (num2.toString().split('.')[1] || '').length; // 小数点后几位
+    const baseNum = Math.pow(10, Math.max(num1Digits, num2Digits)); // 放大小数位最大的倍数
+    return (times(num1, baseNum) + times(num2, baseNum)) / baseNum  // 放大，变成整数后相加，再还原。
+}
+```
+
+### minus
+
+> 减 -
+
+```javascript
+const minus = (num1, num2) => {
+    const num1Digits = (num1.toString().split('.')[1] || '').length; // 小数点后几位
+    const num2Digits = (num2.toString().split('.')[1] || '').length; // 小数点后几位
+    const baseNum = Math.pow(10, Math.max(num1Digits, num2Digits)); // 放大小数位最大的倍数
+    return (times(num1, baseNum) - times(num2, baseNum)) / baseNum  // 放大，变成整数后相减，再还原。
+}
+```
+
+### times
+
+> 乘 *
+
+```javascript
+const times = (num1, num2) => {
+    const num1Digits = (num1.toString().split('.')[1] || '').length; // 小数点后几位
+    const num2Digits = (num2.toString().split('.')[1] || '').length; // 小数点后几位
+    const baseNum =  Math.pow(10, num1Digits + num2Digits); // 与加、减不同，放大两小数位数之和的倍数
+    return Number(num1String.replace('.', '')) * Number(num2String.replace('.', '')) / baseNum
+}
+```
+
+### divide
+
+> 除 /
+
+```javascript
+const divide = (num1, num2) => {
+  const num1Digits = (num1.toString().split('.')[1] || '').length; // 小数点后几位
+  const num2Digits = (num2.toString().split('.')[1] || '').length; // 小数点后几位
+  const baseNum = Math.pow(10, num1Digits + num2Digits); // 与加、减不同，放大两小数位数之和的倍数
+  let n1 = times(num1, baseNum) // 调用乘法，扩大
+  let n2 = times(num2, baseNum) // 调用乘法，扩大
+  return Number(n1) / Number(n2)
+}
+```
+
 ## 时间
 
 ### currentDateTime
