@@ -158,7 +158,7 @@ function queryStringify(obj, prefix = null) {
 }
 ```
 
-### get
+### getObjectVal
 
 > 安全获取对象字段
 
@@ -169,7 +169,7 @@ function queryStringify(obj, prefix = null) {
  * @param {String} path 字段路径，支持 'a.b[0].c[d]'、'[a][b][c]'、'[a,b,c]'、'[a,b,c]'
  * @param {*} deflt 取不到时返回的默认值
  */
-const get = (obj, path, deflt) => {
+const getObjectVal = (obj, path, deflt) => {
     if (obj == null) return deflt
 
     let keys = JSON.stringify(path).match(/[^.,\s\[\]\'\"]+/g)
@@ -190,7 +190,7 @@ const get = (obj, path, deflt) => {
 }
 ```
 
-### set
+### setObjectVal
 
 > 安全设置对象字段
 
@@ -201,7 +201,7 @@ const get = (obj, path, deflt) => {
  * @param {String} path 字段路径，支持 'a.b[0].c[d]'、'[a][b][c]'、'[a,b,c]'、'[a,b,c]'
  * @param {*} value 设置的值
  */
-const set = (obj, path, value) => {
+const setObjectVal = (obj, path, value) => {
     if (obj == null || path == null) return obj
 
     // eslint-disable-next-line no-useless-escape
