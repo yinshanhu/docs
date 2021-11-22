@@ -85,6 +85,25 @@ function getHashString(name) {
 }
 ```
 
+### getScriptLinkParams
+
+> 获得script标签链接上的参数
+
+```javascript
+const getScriptLinkParams = () => {
+    let scripts = document.getElementsByTagName('script');
+    let src = scripts[scripts.length - 1].src;
+    let arg = src.indexOf('?') !== -1 ? src.split('?').pop() : '';
+    
+    let settings = {}; // 解析参数并存储到 settings 变量中
+    arg.replace(/(\w+)(?:=([^&]*))?/g, (a, key, value) => {
+        settings[key] = value;
+    });
+
+    return settings;
+}
+```
+
 ### compareVersion
 
 > 字符串版本号比较
