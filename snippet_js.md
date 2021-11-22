@@ -94,13 +94,13 @@ const getScriptLinkParams = () => {
     let scripts = document.getElementsByTagName('script');
     let src = scripts[scripts.length - 1].src;
     let arg = src.indexOf('?') !== -1 ? src.split('?').pop() : '';
-    
-    let settings = {}; // 解析参数并存储到 settings 变量中
+
+    let params = {}; // 解析参数并存储到 params 变量中
     arg.replace(/(\w+)(?:=([^&]*))?/g, (a, key, value) => {
-        settings[key] = value;
+        params[key] = value;
     });
 
-    return settings;
+    return params;
 }
 ```
 
