@@ -43,5 +43,5 @@ data() {
 > 如果需要使用vue的事件（非element事件），事件后面须加 `.native`
 
 ```html
-<el-button @dblclick.native="setTag(tag)"><el-button
+<el-button @dblclick.native="setTag(tag)"><el-button>
 ```
