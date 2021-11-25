@@ -417,6 +417,27 @@ const searchVal = (object, value) => {
 }
 ```
 
+### randomString
+
+> 生成指定长度的随机字符串
+
+```javascript
+/**
+ * @param {len} number 字符串长度
+ * @return {string} 随机字符串
+ */
+const randomString = (len) => {
+　　len = len || 32;
+    let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+    let maxPos = $chars.length,
+        pwd = '';
+　　for (let i = 0; i < len; i++) {
+　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+　　}
+　　return pwd;
+},
+```
+
 ## 浮点计算
 
 ### plus
