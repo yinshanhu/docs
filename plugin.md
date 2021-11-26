@@ -52,5 +52,5 @@ systemctl start grafana-server
 
 !> 数据源地址添加访问header，可配置 `Auth Proxy` 项：
 
-![](./asset/image/grafana-datasource-header.jpg)
+![](./asset/image/grafana-datasource-header.png)
 
