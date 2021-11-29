@@ -16,6 +16,12 @@
 
 - [swiper](https://www.swiper.com.cn)
 
+#### html2canvas
+
+> Screenshots with JavaScript
+
+- [html2canvas](https://html2canvas.hertzen.com)
+
 #### grafana
 
 > Grafana是一个跨平台的开源的分析和可视化工具，可以通过将采集的数据查询然后可视化的展示，并及时通知。

@@ -20,6 +20,7 @@
   * [pdfh5](plugin.md?id=pdfh5)
   * [clipboard](plugin.md?id=clipboard)
   * [swiper](plugin.md?id=swiper)
+  * [html2canvas](plugin.md?id=html2canvas)
   * [grafana](plugin.md?id=grafana)
 
 * 读书
