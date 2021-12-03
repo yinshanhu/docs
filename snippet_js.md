@@ -1,24 +1,5 @@
 ## 基础
 
-### getCookie
-
-> 获取Cookie
-
-```javascript
-function getCookie(name, cookieName) {
-    var cie = new RegExp('(?:^|; )' + encodeURIComponent(cookieName || name || '') + '=([^;]*)').exec(document.cookie)
-    if (!cie) return null;
-    if (!cookieName) {
-        return cie ? decodeURIComponent(cie[1]) : null
-    } else {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = cie[1].match(reg);
-        if (r != null) return unescape(decodeURIComponent(r[2]));
-        return null;
-    }
-}
-```
-
 ### loadJs
 
 > 加载第三方jssdk
@@ -48,6 +29,186 @@ function promiseFactory(id: string, src: string) {
     return new Promise((resolve, reject) => {
         reject()
     })
+}
+```
+
+### compareVersion
+
+> 字符串版本号比较
+
+```javascript
+/* *
+ * version1 减 version2
+ * 返回 1：version1 > version2，-1：version1 < version2，0：version1 == version2
+ * */
+function compareVersion(version1, version2) {
+    let arr1 = version1.split('.')
+    let arr2 = version2.split('.')
+    let length1 = arr1.length
+    let length2 = arr2.length
+    let minlength = Math.min(length1, length2)
+    let i = 0
+    for (i; i < minlength; i++) {
+        let a = parseInt(arr1[i])
+        let b = parseInt(arr2[i])
+        if (a > b) {
+            return 1
+        } else if (a < b) {
+            return -1
+        }
+    }
+    if (length1 > length2) {
+        for (let j = i; j < length1; j++) {
+            if (parseInt(arr1[j]) != 0) {
+                return 1
+            }
+        }
+        return 0
+    } else if (length1 < length2) {
+        for (let j = i; j < length2; j++) {
+            if (parseInt(arr2[j]) != 0) {
+                return -1
+            }
+        }
+        return 0
+    }
+    return 0
+}
+```
+
+### debounce
+
+> 函数防抖
+
+```javascript
+/**
+ * 函数防抖
+ * @param {*} fn 回调函数
+ * @param {Number} interval 间隔
+ */
+const debounce = (fn, interval) => {
+    let timeid
+
+    return function (...args) {
+        if (timeid) {
+            clearTimeout(timeid)
+        }
+
+        timeid = setTimeout(() => {
+            fn.apply(this, args)
+        }, interval)
+    }
+}
+```
+
+### throttle
+
+> 函数节流
+
+```javascript
+/**
+ * 函数节流
+ * @param {*} func 回调函数
+ * @param {Number} wait 间隔
+ * @param {Object} options 间隔
+ */
+const throttle = (func, wait, options) => {
+    /* options的默认值
+     *  表示首次调用返回值方法时，会马上调用func；否则仅会记录当前时刻，当第二次调用的时间间隔超过wait时，才调用func。
+     *  options.leading = true;
+     * 表示当调用方法时，未到达wait指定的时间间隔，则启动计时器延迟调用func函数，若后续在既未达到wait指定的时间间隔和func函数又未被调用的情况下调用返回值方法，则被调用请求将被丢弃。
+     *  options.trailing = true;
+     * 注意：当options.trailing = false时，效果与上面的简单实现效果相同
+     */
+    var context, args, result
+    var timeout = null
+    var previous = 0
+    if (!options) options = {}
+    var later = function () {
+        previous = options.leading === false ? 0 : Date.now()
+        timeout = null
+        result = func.apply(context, args)
+        if (!timeout) context = args = null
+    }
+    return function () {
+        var now = Date.now()
+        if (!previous && options.leading === false) previous = now
+        // 计算剩余时间
+        var remaining = wait - (now - previous)
+        context = this
+        args = arguments
+        // 当到达wait指定的时间间隔，则调用func函数
+        // 精彩之处：按理来说remaining <= 0已经足够证明已经到达wait的时间间隔，但这里还考虑到假如客户端修改了系统时间则马上执行func函数。
+        if (remaining <= 0 || remaining > wait) {
+            // 由于setTimeout存在最小时间精度问题，因此会存在到达wait的时间间隔，但之前设置的setTimeout操作还没被执行，因此为保险起见，这里先清理setTimeout操作
+            if (timeout) {
+                clearTimeout(timeout)
+                timeout = null
+            }
+            previous = now
+            result = func.apply(context, args)
+            if (!timeout) context = args = null
+        } else if (!timeout && options.trailing !== false) {
+            // options.trailing=true时，延时执行func函数
+            timeout = setTimeout(later, remaining)
+        }
+        return result
+    }
+}
+```
+
+### randomString
+
+> 生成指定长度的随机字符串
+
+```javascript
+/**
+ * @param {len} number 字符串长度
+ * @return {string} 随机字符串
+ */
+const randomString = (len) => {
+　　len = len || 32;
+    let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+    let maxPos = $chars.length,
+        pwd = '';
+　　for (let i = 0; i < len; i++) {
+　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+　　}
+　　return pwd;
+},
+```
+
+### sleep
+
+> 线程阻塞毫秒数
+
+```javascript
+/**
+ * @param ms
+ */
+const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+```
+
+## 参数获取
+
+### getCookie
+
+> 获取Cookie
+
+```javascript
+function getCookie(name, cookieName) {
+    var cie = new RegExp('(?:^|; )' + encodeURIComponent(cookieName || name || '') + '=([^;]*)').exec(document.cookie)
+    if (!cie) return null;
+    if (!cookieName) {
+        return cie ? decodeURIComponent(cie[1]) : null
+    } else {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = cie[1].match(reg);
+        if (r != null) return unescape(decodeURIComponent(r[2]));
+        return null;
+    }
 }
 ```
 
@@ -104,47 +265,108 @@ const getScriptLinkParams = () => {
 }
 ```
 
-### compareVersion
+## 数组操作
 
-> 字符串版本号比较
+### isCoincide
+
+> 判断两区间是否有交集（重合）
 
 ```javascript
-/* *
- * version1 减 version2
- * 返回 1：version1 > version2，-1：version1 < version2，0：version1 == version2
- * */
-function compareVersion(version1, version2) {
-    let arr1 = version1.split('.')
-    let arr2 = version2.split('.')
-    let length1 = arr1.length
-    let length2 = arr2.length
-    let minlength = Math.min(length1, length2)
-    let i = 0
-    for (i; i < minlength; i++) {
-        let a = parseInt(arr1[i])
-        let b = parseInt(arr2[i])
-        if (a > b) {
-            return 1
-        } else if (a < b) {
-            return -1
+/**
+ * 函数节流
+ * @param {Array} section1 区间1，示例：[12,56]
+ * @param {Array} section2 区间2，示例：[32,87]
+ */
+const isCoincide = (section1, section2) => {
+    let maxStart = [section1[0], section2[0]],
+        minEnd = [section1[1], section2[1]];
+    if (Math.max(...maxStart) <= Math.min(...minEnd)) {
+        return true; //有交集
+    }
+    return false;
+}
+```
+
+### uniqueItem
+
+> 对象数组去重
+
+```javascript
+/**
+ * 对象数组去重
+ * @param {Array} objArray 对象数组
+ * @param {String} byKey 去重对比key
+ */
+const uniqueItem = (objArray, byKey) => {
+    let hash = {};
+    objArray = objArray.reduce( (item, next) => {
+        hash[next[byKey]] ? '' : hash[next[byKey]] = true && item.push(next);
+        return item;
+    }, []);
+    return objArray;
+}
+```
+
+## 对象操作
+
+### searchVal
+
+> 对象中是否存在某值
+
+```javascript
+/**
+ * 查找对象中第一个value，并返回路径上所有key值
+ * @param {Object} object 对象: {a:{b:1},c:{d:{e:2},f:{g:{h:3,i:{j:4,k:5,m:6}}}}}
+ * @param {String} value 要查到的value：4
+ * @return {Arry} 查找到的路径：['c', 'f', 'g', 'i', 'j']
+ */
+const searchVal = (object, value) => {
+    for (let key in object) {
+        if (object[key] == value) return [key];
+        if (typeof object[key] == "object") {
+            let temp = searchVal(object[key], value);
+            if (temp) return [key, temp].flat(); // flat() 方法，这个方法可以抹平一个数组。不管嵌套了多少的数组，都会展开成为一个无嵌套数组
         }
     }
-    if (length1 > length2) {
-        for (let j = i; j < length1; j++) {
-            if (parseInt(arr1[j]) != 0) {
-                return 1
-            }
-        }
-        return 0
-    } else if (length1 < length2) {
-        for (let j = i; j < length2; j++) {
-            if (parseInt(arr2[j]) != 0) {
-                return -1
-            }
-        }
-        return 0
-    }
-    return 0
+}
+```
+
+### removeEmptyP
+
+> 去除对象的空值属性
+
+```javascript
+/**
+ * @param obj
+ */
+const removeEmptyP = (obj) => {
+    Object.keys(obj).forEach(key => {
+      if (obj[key] === null || obj[key] === '' || obj[key] === 'undefined') {
+        delete obj[key];
+      }
+    });
+  }
+```
+
+### deepCopy
+
+> 对象深拷贝
+
+```javascript
+//对象深拷贝
+const deepCopy = (obj) => {
+    if (obj == null) { return null } 
+    let result = Array.isArray(obj) ? [] : {}; 
+    for (let key in obj) { 
+        if (obj.hasOwnProperty(key)) { 
+            if (typeof obj[key] === 'object') { 
+                result[key] = deepCopy(obj[key]); // 如果是对象，再次调用该方法自身 
+            } else {
+                result[key] = obj[key]; 
+            } 
+        } 
+    } 
+    return result;
 }
 ```
 
@@ -250,192 +472,6 @@ const setObjectVal = (obj, path, value) => {
 
     return obj
 }
-```
-
-### debounce
-
-> 函数防抖
-
-```javascript
-/**
- * 函数防抖
- * @param {*} fn 回调函数
- * @param {Number} interval 间隔
- */
-const debounce = (fn, interval) => {
-    let timeid
-
-    return function (...args) {
-        if (timeid) {
-            clearTimeout(timeid)
-        }
-
-        timeid = setTimeout(() => {
-            fn.apply(this, args)
-        }, interval)
-    }
-}
-```
-
-### throttle
-
-> 函数节流
-
-```javascript
-/**
- * 函数节流
- * @param {*} func 回调函数
- * @param {Number} wait 间隔
- * @param {Object} options 间隔
- */
-const throttle = (func, wait, options) => {
-    /* options的默认值
-     *  表示首次调用返回值方法时，会马上调用func；否则仅会记录当前时刻，当第二次调用的时间间隔超过wait时，才调用func。
-     *  options.leading = true;
-     * 表示当调用方法时，未到达wait指定的时间间隔，则启动计时器延迟调用func函数，若后续在既未达到wait指定的时间间隔和func函数又未被调用的情况下调用返回值方法，则被调用请求将被丢弃。
-     *  options.trailing = true;
-     * 注意：当options.trailing = false时，效果与上面的简单实现效果相同
-     */
-    var context, args, result
-    var timeout = null
-    var previous = 0
-    if (!options) options = {}
-    var later = function () {
-        previous = options.leading === false ? 0 : Date.now()
-        timeout = null
-        result = func.apply(context, args)
-        if (!timeout) context = args = null
-    }
-    return function () {
-        var now = Date.now()
-        if (!previous && options.leading === false) previous = now
-        // 计算剩余时间
-        var remaining = wait - (now - previous)
-        context = this
-        args = arguments
-        // 当到达wait指定的时间间隔，则调用func函数
-        // 精彩之处：按理来说remaining <= 0已经足够证明已经到达wait的时间间隔，但这里还考虑到假如客户端修改了系统时间则马上执行func函数。
-        if (remaining <= 0 || remaining > wait) {
-            // 由于setTimeout存在最小时间精度问题，因此会存在到达wait的时间间隔，但之前设置的setTimeout操作还没被执行，因此为保险起见，这里先清理setTimeout操作
-            if (timeout) {
-                clearTimeout(timeout)
-                timeout = null
-            }
-            previous = now
-            result = func.apply(context, args)
-            if (!timeout) context = args = null
-        } else if (!timeout && options.trailing !== false) {
-            // options.trailing=true时，延时执行func函数
-            timeout = setTimeout(later, remaining)
-        }
-        return result
-    }
-}
-```
-
-### isCoincide
-
-> 判断两区间是否有交集（重合）
-
-```javascript
-/**
- * 函数节流
- * @param {Array} section1 区间1，示例：[12,56]
- * @param {Array} section2 区间2，示例：[32,87]
- */
-const isCoincide = (section1, section2) => {
-    let maxStart = [section1[0], section2[0]],
-        minEnd = [section1[1], section2[1]];
-    if (Math.max(...maxStart) <= Math.min(...minEnd)) {
-        return true; //有交集
-    }
-    return false;
-}
-```
-
-### deepCopy
-
-> 对象深拷贝
-
-```javascript
-//对象深拷贝
-const deepCopy = (obj) => {
-    if (obj == null) { return null } 
-    let result = Array.isArray(obj) ? [] : {}; 
-    for (let key in obj) { 
-        if (obj.hasOwnProperty(key)) { 
-            if (typeof obj[key] === 'object') { 
-                result[key] = deepCopy(obj[key]); // 如果是对象，再次调用该方法自身 
-            } else {
-                result[key] = obj[key]; 
-            } 
-        } 
-    } 
-    return result;
-}
-```
-
-### uniqueItem
-
-> 对象数组去重
-
-```javascript
-/**
- * 对象数组去重
- * @param {Array} objArray 对象数组
- * @param {String} byKey 去重对比key
- */
-const uniqueItem = (objArray, byKey) => {
-    let hash = {};
-    objArray = objArray.reduce( (item, next) => {
-        hash[next[byKey]] ? '' : hash[next[byKey]] = true && item.push(next);
-        return item;
-    }, []);
-    return objArray;
-}
-```
-
-### searchVal
-
-> 可用于验证对象中是否存在某值
-
-```javascript
-/**
- * 查找对象中第一个value，并返回路径上所有key值
- * @param {Object} object 对象: {a:{b:1},c:{d:{e:2},f:{g:{h:3,i:{j:4,k:5,m:6}}}}}
- * @param {String} value 要查到的value：4
- * @return {Arry} 查找到的路径：['c', 'f', 'g', 'i', 'j']
- */
-const searchVal = (object, value) => {
-    for (let key in object) {
-        if (object[key] == value) return [key];
-        if (typeof object[key] == "object") {
-            let temp = searchVal(object[key], value);
-            if (temp) return [key, temp].flat(); // flat() 方法，这个方法可以抹平一个数组。不管嵌套了多少的数组，都会展开成为一个无嵌套数组
-        }
-    }
-}
-```
-
-### randomString
-
-> 生成指定长度的随机字符串
-
-```javascript
-/**
- * @param {len} number 字符串长度
- * @return {string} 随机字符串
- */
-const randomString = (len) => {
-　　len = len || 32;
-    let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
-    let maxPos = $chars.length,
-        pwd = '';
-　　for (let i = 0; i < len; i++) {
-　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-　　}
-　　return pwd;
-},
 ```
 
 ## 浮点计算
