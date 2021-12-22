@@ -593,6 +593,15 @@ let endtime = '2100/01/01 00:00:00';  // 结束日期
 const countDown = () => {
     let prevTime = Date.now();
     let time = ((new Date(endtime).getTime() - prevTime) / 1000 ).toFixed(0); // 计算距离结束之日的总秒数
+
+    // 补全个位数的时间，如04天01时05分02秒
+    function complete(str) {
+        if (str < 10) {
+            return `${str}`.padStart(2, "0");
+        }
+        return str;
+    }
+
     window._setTimeInterval = setInterval(() => {
         time = time - (((Date.now() - prevTime) / 1000).toFixed(0));
         if(time <= 0) {
@@ -617,7 +626,7 @@ const countDown = () => {
             //秒
             seconds = modulo % 60;
 
-        console.log("剩余抢购:" + days + "天" + hours + "：" + minutes + "：" + seconds);
+        console.log(`剩余抢购:${complete(days)}天${complete(hours)}时${complete(minutes)}分${complete(seconds)}秒`);
     }, 1000);
 }
 ```
