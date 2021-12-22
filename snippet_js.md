@@ -584,6 +584,44 @@ const countDown = () => {
 }
 ```
 
+> 日期倒计时（锁屏不停止，秒倒计时改装下即可）
+
+```javascript
+
+let endtime = '2100/01/01 00:00:00';  // 结束日期
+
+const countDown = () => {
+    let prevTime = Date.now();
+    let time = ((new Date(endtime).getTime() - prevTime) / 1000 ).toFixed(0); // 计算距离结束之日的总秒数
+    window._setTimeInterval = setInterval(() => {
+        time = time - (((Date.now() - prevTime) / 1000).toFixed(0));
+        if(time <= 0) {
+            clearInterval(_setTimeInterval);
+
+            console.log("抢购进行中...");
+        }
+        prevTime = Date.now();
+
+        //总秒数
+        let totalSeconds = time,
+            //天数
+            days = Math.floor(totalSeconds / (60 * 60 * 24)),
+            //取模（余数）
+            modulo = totalSeconds % (60 * 60 * 24),
+            //小时数
+            hours = Math.floor(modulo / (60 * 60));
+
+        modulo = modulo % (60 * 60);
+        //分钟
+        let minutes = Math.floor(modulo / 60),
+            //秒
+            seconds = modulo % 60;
+
+        console.log("剩余抢购:" + days + "天" + hours + "：" + minutes + "：" + seconds);
+    }, 1000);
+}
+```
+
 ### diffTime
 
 > 当前日期时间
