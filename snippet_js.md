@@ -562,6 +562,28 @@ currentDateTime() {
 }
 ```
 
+### countDown
+
+> 60 秒倒计时（锁屏不停止）
+
+```javascript
+
+let time = 60; // 60 秒倒计时
+
+const countDown = () => {
+    let prevTime = Date.now();
+    window._setTimeInterval = setInterval(() => {
+        time = time - (((Date.now() - prevTime)/1000).toFixed(0));
+        if(time <= 0) {
+            clearInterval(_setTimeInterval);
+            time = 60;
+        }
+        prevTime = Date.now();
+        console.log("倒计时：" + time + " s")
+    }, 1000);
+}
+```
+
 ### diffTime
 
 > 当前日期时间
