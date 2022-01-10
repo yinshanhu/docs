@@ -1,3 +1,22 @@
+## 生成BFC
+
+> 生成独立容器，容器与容器、容器内的元素与容器相互不影响。
+
+```css
+根元素html
+
+float属性不为none
+
+position为absolute或fixed
+
+display为inline-block, flex, inline-flex, table-cell, table-caption
+
+overflow不为visible
+```
+
+1. 防止浮动覆盖
+2. 清除内部浮动
+3. 防止margin重叠
 
 ## 布局
 
