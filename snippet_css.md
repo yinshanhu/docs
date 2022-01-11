@@ -1,3 +1,38 @@
+## 重绘和回流（重排）
+
+- 常见引起重排属性和方法
+
+width | height  |  margin  |  padding |  display
+-----|-----|-----|-----|-----
+border-width | border |position |overflow|font-size
+vertical-align| min-height | clientWidth|clientHeight|clientTop
+clientLeft| offsetWudth |offsetHeight |offsetTop|offsetLeft
+scrollWidth| scrollHeight |scrollTop |scrollLeft|scrollIntoView()
+scrollTo()| getComputedStyle() |getBoundingClientRect() |scrollIntoViewIfNeeded()|
+
+- 常见的引起重绘的属性
+
+color | border-style  |  visibility  |  background |  text-decoration
+-----|-----|-----|-----|-----
+background-image | background-position |background-repeat |outline-color|outline
+outline-style| border-radius | outline-width|box-shadow|background-size
+
+**重点：**
+
+1. 回流必定会触发重绘，重绘不一定会触发回流。重绘的开销较小，回流的代价较高。
+2. 重绘和回流都影响页面的响应速度
+3. 重绘和回流是无法避免的
+4. 重绘和回流这个问题只能优化，不能解决
+5. 任何的DOM操作都会引发回流
+
+**JavaScript避免回流的方法：**
+
+1. 避免频繁操作样式，最好一次性重写style属性，或者将样式列表定义为class并一次性更改class属性。
+2. 避免频繁操作DOM，创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中。
+3. 也可以先为元素设置display: none，操作结束后再把它显示出来。因为`在display属性为none的元素上进行的DOM操作不会引发回流和重绘`。
+4. 避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。
+5. 对具有复杂动画的元素使用绝对定位，使它脱离文档流，否则会引起父元素及后续元素频繁回流。
+
 ## 生成BFC
 
 > 生成独立容器，容器与容器、容器内的元素与容器相互不影响。
