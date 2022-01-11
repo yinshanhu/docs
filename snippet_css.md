@@ -3,17 +3,17 @@
 - 常见引起重排属性和方法
 
 width | height  |  margin  |  padding |  display
------|-----|-----|-----|-----
+-----|:-----:|:-----:|:-----:|-----
 border-width | border |position |overflow|font-size
 vertical-align| min-height | clientWidth|clientHeight|clientTop
 clientLeft| offsetWudth |offsetHeight |offsetTop|offsetLeft
 scrollWidth| scrollHeight |scrollTop |scrollLeft|scrollIntoView()
 scrollTo()| getComputedStyle() |getBoundingClientRect() |scrollIntoViewIfNeeded()|
 
-- 常见的引起重绘的属性
+- 常见引起重绘的属性
 
 color | border-style  |  visibility  |  background |  text-decoration
------|-----|-----|-----|-----
+-----|:-----:|:-----:|:-----:|-----
 background-image | background-position |background-repeat |outline-color|outline
 outline-style| border-radius | outline-width|box-shadow|background-size
 
