@@ -151,7 +151,7 @@ console.log('成功启动');
 
 ```javascript
 let key = ctx.request.body.memberid;
-const val = cache.getCache(key);
+const val = cache.getRedis(key);
 if (val == 1) {
     ctx.response.failure({
         data: [],
@@ -160,7 +160,7 @@ if (val == 1) {
         msgForDev: ""
     });
 } else {
-    cache.setCache(key, 1 ,'1'); // 1s cache time and the value is 1 
+    cache.setRedis(key, 1 ,'1'); // 1s cache time and the value is 1 
     // pass:
     // ...
 }
