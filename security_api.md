@@ -1,4 +1,7 @@
-## 前端请求设置签名
+
+## 签名验证
+
+**前端请求设置签名**
 
 - 签名生成
 
@@ -67,7 +70,7 @@ axios.interceptors.request.use(
 );
 ```
 
-## 后端nodejs校验签名
+**后端nodejs校验签名**
 
 ```javascript
 const Koa = require('koa');

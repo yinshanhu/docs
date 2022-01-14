@@ -17,7 +17,7 @@
 
 * 安全 
 
-  * [签名验证](security_api.md)
+  * [接口](security_api.md)
 
 * 插件
   
