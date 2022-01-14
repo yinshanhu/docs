@@ -146,3 +146,22 @@ app.listen(port, hostName, () => {
 
 console.log('成功启动');
 ```
+
+## 频次
+
+```javascript
+let key = ctx.request.body.memberid;
+const val = cache.getCache(key);
+if (val == 1) {
+    ctx.response.failure({
+        data: [],
+        code: "4000",
+        message: "quickly",
+        msgForDev: ""
+    });
+} else {
+    cache.setCache(key, 1 ,'1'); // 1s cache time and the value is 1 
+    // pass:
+    // ...
+}
+```
