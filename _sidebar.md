@@ -5,6 +5,7 @@
   * [JavaScript](snippet_js.md)
   * [Html](snippet_html.md)
   * [Css](snippet_css.md)
+  * [Vue](snippet_vue.md)
   * [C#](snippet_csharp.md)
 
 * 微信
