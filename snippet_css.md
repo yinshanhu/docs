@@ -71,6 +71,17 @@ align-item:flex-start,flex-end,center,stretch
 justify-content:flex-start,flex-end,center,space-between
 ```
 
+### 撑满全屏
+
+```css
+position: absolute;
+z-index: 1;
+left: 0;
+right: 0;
+width: calc(100%);
+height: calc(100%); 
+```
+
 ## BaseCss
 
 ```css
