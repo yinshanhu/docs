@@ -104,3 +104,7 @@ html,body,form,fieldset,p,div,ul,h1,h2,h3,h4,h5,h6,figure,article,strong,dl,dd{b
 .border_right { position: relative; }
 .border_right::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 1px; background: #E4E4E4; transform: scaleX(0.5); transform-origin: right top; }
 ```
+
+## 动画
+
+[缓动函数](https://www.xuanfengge.com/easeing/easeing/#)
