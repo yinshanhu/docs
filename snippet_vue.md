@@ -6,7 +6,7 @@
 
 1. 局部使用
 
-```js
+```javascript
 // main.js
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload)
@@ -18,7 +18,7 @@ Vue.use(VueLazyload)
 </template>
 ```
 
-```js
+```javascript
 methods: {
     getLazyObj(src) {
       return {
@@ -33,12 +33,9 @@ methods: {
 
 2. 全局使用
    
-```js
+```javascript
 // main.js
 import VueLazyload from 'vue-lazyload'
-
-Vue.use(VueLazyload)
-
 Vue.use(VueLazyload, {
   preLoad: 1.3, //（预加载高度比例），默认1.3
   error: 'dist/error.png', //（图片路径错误时加载图片），默认data-src
