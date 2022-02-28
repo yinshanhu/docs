@@ -39,12 +39,11 @@ import VueLazyload from 'vue-lazyload'
 
 Vue.use(VueLazyload)
 
-// 全局使用
 Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  error: 'dist/error.png',
-  loading: 'dist/loading.gif',
-  attempt: 1 
+  preLoad: 1.3, //（预加载高度比例），默认1.3
+  error: 'dist/error.png', //（图片路径错误时加载图片），默认data-src
+  loading: 'dist/loading.gif', //（预加载图片），默认data-src
+  attempt: 1 //（尝试加载图片数量）,默认3
 })
 
 ```
