@@ -60,3 +60,13 @@ systemctl start grafana-server
 
 ![](./asset/image/grafana-datasource-header.png)
 
+
+#### redis
+
+[redis安装包](https://github.com/microsoftarchive/redis/releases)
+
+1. 安装 `Redis-x64-3.0.504.msi`
+
+2. 启动window服务
+
+3. 默认端口`6379`
