@@ -20,6 +20,10 @@
 
   * [接口](security_api.md)
 
+* 命令
+  
+  * [linux](command.md?id=linux)
+
 * 插件
   
   * [pdfh5](plugin.md?id=pdfh5)
@@ -27,10 +31,7 @@
   * [swiper](plugin.md?id=swiper)
   * [html2canvas](plugin.md?id=html2canvas)
   * [grafana](plugin.md?id=grafana)
-
-* 命令
-  
-  * [linux](command.md?id=linux)
+  * [redis](plugin.md?id=redis)
 
 * 读书
   * [invoke](read.md)
