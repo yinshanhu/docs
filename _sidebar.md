@@ -28,5 +28,9 @@
   * [html2canvas](plugin.md?id=html2canvas)
   * [grafana](plugin.md?id=grafana)
 
+* 命令
+  
+  * [linux](command.md?id=linux)
+
 * 读书
   * [invoke](read.md)
