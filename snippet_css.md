@@ -82,6 +82,15 @@ width: calc(100%);
 height: calc(100%); 
 ```
 
+### 绝对定位元素居中
+
+```css
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+```
+
 ## BaseCss
 
 ```css
