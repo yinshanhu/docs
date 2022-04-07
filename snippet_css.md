@@ -91,6 +91,15 @@ top: 50%;
 transform: translate(-50%, -50%);
 ```
 
+### 去掉input默认样式
+```css
+input {
+    background:none;  
+    outline:none;  
+    border:none;
+}
+```
+
 ## BaseCss
 
 ```css
