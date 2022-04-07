@@ -94,6 +94,7 @@ Vue.use(VueLazyload, {
 > 从下往上抽屉效果
 
 ```vue
+<!-- popup.vue -->
 <template>
   <div class="pop">
     <div class="mask" :style="{ display: showModal ? 'block' : 'none' }" @click="closeModal"></div>
