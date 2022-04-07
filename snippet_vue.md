@@ -84,3 +84,144 @@ Vue.use(VueLazyload, {
   }
 </style>
 ```
+
+## 组件
+
+> 工作中常用到的组件
+
+### 弹出层模态（从下往上抽屉效果）
+
+```vue
+<template>
+  <div class="pop">
+    <div class="mask" :style="{ display: showModal ? 'block' : 'none' }" @click="closeModal"></div>
+    <div class="container" :class="[showModal?'toggle':'']" :style="{backgroundColor: bgColor}">
+      <header>
+        <div class="close">
+          <img src="../assets/icon/close.png" @click="closeModal"/>
+        </div>
+        <div class="pop-title">{{title}}</div>
+        <div v-if="line" class="border_top"></div>
+      </header>
+      <main class="pop-content" :style="{padding:padding}">
+        <slot></slot>
+      </main>
+      <footer>
+        <slot name="footer"></slot>
+      </footer>
+    </div>
+  </div>
+</template>
+<script setup>
+import { ref, watch } from "vue";
+let props = defineProps({
+  bgColor: {
+    type: String,
+    default: '#ffffff',
+  },
+  line: {
+    type: Boolean,
+    default: false,
+  },
+  title: {
+    type: String,
+    default: '标题',
+  },
+  show: {
+    type: Boolean,
+    default: false,
+  },
+  padding: {
+    type: String,
+    default: '0 16px 30px',
+  }
+});
+
+let showModal = ref(props.show);
+const closeModal = () => {
+  showModal.value = !showModal.value;
+};
+watch(() => props.show, () => {
+    showModal.value = true
+});
+
+watch(showModal, (newVal) => {
+  // 防止滚动穿透：
+  if (newVal == true) {
+    let cssStr = "overflow-y: hidden; height: 100%;";
+    document.getElementsByTagName("html")[0].style.cssText = cssStr;
+    document.body.style.cssText = cssStr;
+  } else {
+    let cssStr = "overflow-y: auto; height: auto;";
+    document.getElementsByTagName("html")[0].style.cssText = cssStr;
+    document.body.style.cssText = cssStr;
+  }
+});
+</script>
+<style scoped>
+.pop {
+  font-size: 13px;
+}
+.mask {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .7);
+  z-index: 1001;
+  transition: display 0.3s;
+  -webkit-tap-highlight-color: transparent;
+  overflow:hidden;
+}
+.container {
+  border-radius: 10px 10px 0 0;
+  display: block;
+  position: fixed;
+  min-height: 75%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1002;
+  background-color: #ffffff;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  -webkit-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+}
+.container.toggle{
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+.container .close {
+  text-align: right;
+  
+}
+.container .close img {
+  width: 12px;
+  height: 12px;
+  margin: 15px 15px 0 0;
+}
+.pop-content{
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 5.076923em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
+}
+.pop-title{
+    padding-bottom: 7px;
+    font-size: 20px;
+    text-align: center;
+    color: #333333;
+}
+</style>
+```
