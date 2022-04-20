@@ -215,6 +215,21 @@ const supportWebp = () => {
 }
 ```
 
+### query2json
+
+> query参数转json
+
+```javascript
+const query2json = (str) => {
+    let param = {}; // 存储最终JSON结果对象
+    str.replace(/([^?&]+)=([^?&]+)/g, function (s, v, k) {
+        param[v] = k;
+        return k + '=' + v;
+    });
+    return param;
+}
+```
+
 ## 参数获取
 
 ### getCookie
