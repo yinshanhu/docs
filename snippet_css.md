@@ -119,9 +119,38 @@ html,body,form,fieldset,p,div,ul,h1,h2,h3,h4,h5,h6,figure,article,strong,dl,dd{b
 .border_right::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 1px; background: #E4E4E4; transform: scaleX(0.5); transform-origin: right top; }
 .border_top { position: relative; }
 .border_top::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: #E4E4E4; transform: scaleY(0.5); transform-origin: left top; }
-.border_right { position: relative; }
-.border_right::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 1px; background: #E4E4E4; transform: scaleX(0.5); transform-origin: right top; }
 ```
+
+## 形状
+
+### 三角形
+
+![](./asset/image/css/sanjiao.png)
+
+```css
+/* 第一种写法 */
+.sanjiao {
+    width: 0px;
+    height: 0px;
+    border-top: 50px solid red;
+    border-bottom: 50px solid gray;
+    border-left: 50px solid green;
+    border-right: 50px solid black;
+}
+```
+
+```css
+/* 第二种简洁写法 */
+.sanjiao {
+    width: 0px;
+    height: 0px;
+    border-width: 50px 50px 50px 50px;
+    border-style: solid;
+    border-color: red gray green black;
+}
+```
+
+> border-width 影响三角形的高度或宽度，根据实际需求设定
 
 ## 动画
 
