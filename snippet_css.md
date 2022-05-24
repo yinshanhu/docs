@@ -82,9 +82,10 @@ width: calc(100%);
 height: calc(100%); 
 ```
 
-### 绝对定位元素居中
+### 元素居中
 
 ```css
+/* 绝对定位方式 */
 position: absolute;
 left: 50%;
 top: 50%;
@@ -97,6 +98,22 @@ input {
     background:none;  
     outline:none;  
     border:none;
+}
+```
+
+### 防止页面加载图片抖动
+```css
+.product-img {
+    
+    /*  =====核心代码 start=====  */
+    overflow:hidden;
+    height:0;
+    padding-bottom:*;  /*  其中*处填 图片的高宽百分比=高/宽*100%  */
+    /*  =====核心代码 end=====  */
+
+    img {
+        width:100%;
+    }
 }
 ```
 
