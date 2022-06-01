@@ -11,6 +11,7 @@
 * 微信
   
   * [公众号](wx_offiaccount.md)
+  * [小程序](wx_miniprogram.md)
 
 * UI框架
   
