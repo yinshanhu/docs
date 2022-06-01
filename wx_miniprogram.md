@@ -1,6 +1,6 @@
-## 微信小程序
+## 内嵌h5与miniprogram通讯
 
-### 内嵌h5与miniprogram通讯
+### 一、error event 和 hashchange
 
 ```javascript
 // 内嵌h5页面
@@ -54,4 +54,4 @@ loaderror(res){
 
 ```
 
-
+### 二、websocket
