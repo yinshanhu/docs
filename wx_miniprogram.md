@@ -63,7 +63,6 @@ loaderror(res){
 #### 动态修改数组中的某一值
 
 ```javascript
-
 // data中的数据：
 data:{
   goodsList: [
