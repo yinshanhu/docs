@@ -268,12 +268,25 @@ function getCookie(name, cookieName) {
 > 获取链接参数
 
 ```javascript
+// 第一种（推荐）
+function getUrlParam(url, name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
+    if (!match) {
+        return "";
+    }
+    return decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+```
+
+```javascript
+// 第二种
 function getQueryString(name) {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     let r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(decodeURIComponent(r[2]));
     return "";
 }
+
 ```
 
 ### getHashString
@@ -315,6 +328,23 @@ const getScriptLinkParams = () => {
     return params;
 }
 ```
+
+### appendParam
+
+> 给参数里的链接附加参数
+
+```javascript
+// 例：/page/common/webview/index?src=https%3A%2F%2Fwwww.baidu.com&islogin=1&show=1
+// 给src里的 https://www.baidu.com 附加参数，如附加v2=222 ， https://www.baidu.com?v2=222
+const appendParam = (url, json) => {
+    let src = this.getUrlParam(url, 'src'); //取出src参数的值，已decodeURIComponent
+    Object.keys(json).forEach((key) => {
+        src += `${src.indexOf('?') > -1 ? '&' : '?'}${key}=${decodeURIComponent(json[val])}`;
+    })
+    return url.replace(/[?&]src=([^&]*)/, `?src=${encodeURIComponent(src)}`); // 替换原src的值
+}
+```
+
 
 ## 数组操作
 
