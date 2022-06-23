@@ -339,7 +339,7 @@ const getScriptLinkParams = () => {
 const appendParam = (url, json) => {
     let src = this.getUrlParam(url, 'src'); //取出src参数的值，已decodeURIComponent
     Object.keys(json).forEach((key) => {
-        src += `${src.indexOf('?') > -1 ? '&' : '?'}${key}=${decodeURIComponent(json[val])}`;
+        src += `${src.indexOf('?') > -1 ? '&' : '?'}${key}=${decodeURIComponent(json[key])}`;
     })
     return url.replace(/[?&]src=([^&]*)/, `?src=${encodeURIComponent(src)}`); // 替换原src的值
 }
