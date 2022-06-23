@@ -230,6 +230,18 @@ const query2json = (str) => {
 }
 ```
 
+### json2query
+
+> json转query链接
+
+```javascript
+const json2query = (json) => {
+    return Object.keys(json).map((key) => {
+        return encodeURIComponent(key) + "=" + encodeURIComponent(json[key]);
+    }).join("&");
+}
+```
+
 ## 参数获取
 
 ### getCookie
