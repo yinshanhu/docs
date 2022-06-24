@@ -712,6 +712,95 @@ const countDown = () => {
 }
 ```
 
+>　列表倒计时，适用于只有一个计时器的场景（为了提升性能）
+
+```javascript
+/**
+ * 只有一个计时器的倒计时
+ * @param {Array} list 截止时间列表 {state:1, startTime:'2022-06-24 14:00', endTime:'2022-06-30 15:00'}  state：1，未开始  2，进行中  3，已结束
+ * @param {String} serverTime 服务器时间
+ */
+const countDown = (list, serverTime) =>  {
+    let prevTime = new Date(serverTime.replace(/-/g, '/')).getTime();
+    let diff = prevTime - Date.now(); // 计算时间差
+    let timeObj = {}; // 记录每一项的总秒数
+    let timeHander = null; // 倒计时句柄，用于倒计时完成时清除句柄
+
+    // 补全两位数
+    const complete = (str) => {
+        if (str < 10) {
+            return `${str}`.padStart(2, "0");
+        }
+        return str;
+    }
+
+    // 求得 时-分-秒
+    const setTheTime = (index) => {
+        let totalSeconds = timeObj[index],
+            modulo = totalSeconds % (60 * 60 * 24),
+            hours = Math.floor(modulo / (60 * 60));
+        modulo = modulo % (60 * 60);
+        let minutes = Math.floor(modulo / 60),
+            seconds = modulo % 60;
+
+        // 设置倒计时字段
+        this.setData({
+            [`goodslist.items[${index}].timeDown`]: `${complete(hours)}:${complete(minutes)}:${complete(seconds)}`
+        })
+    }
+
+    // 遍历列表
+    // isInit: true,初始展示， false，倒计时展示 
+    const forEachList = (isInit) => {
+        list.forEach((item, index) => {
+            if (item.state != 3) { // state != 3 不是已结束的数据项，也可以依据时间范围来过虑
+                //  求得 当前剩多少秒：(活动截止时间 与 当前时间 做差)
+                if (isInit) { // 初始展示
+                    timeObj[index] = ((new Date((item.state == 1 ? item.startTime : item.endTime).replace(/-/g, '/')).getTime() - prevTime) / 1000).toFixed(0);
+                } else {
+                    // 倒计时展示 
+                    timeObj[index] = timeObj[index] - ((((Date.now() + diff) - prevTime) / 1000).toFixed(0));
+                }
+                if (timeObj[index] >= 0) { // 还有秒数
+                    setTheTime(index); // 求得 时-分-秒
+                } else {
+                    // 修改每一项的状态：将 未开始 变为 进行中，进行中 变为 已结束
+                    list[index].state = item.state == 1 ? 2 : 3;
+    
+                    // 进行中的倒计时，取结束时间进行倒计时：
+                    if (list[index].state == 2) {
+                        timeObj[index] = ((new Date(item.endTime.replace(/-/g, '/')).getTime() - prevTime) / 1000).toFixed(0);
+                        setTheTime(index);
+                    }
+                    // 更改状态：state：1，未开始  2，进行中  3，已结束
+                    this.setData({
+                        [`goodslist.items[${index}].state`]: list[index].state
+                    })
+                }
+            }
+        });
+    }
+
+    // 初始展示倒计时：
+    forEachList(true);
+    
+    // 开始倒计时：
+    timeHander = setInterval(() => {
+        // 每1秒遍历一次列表：
+        forEachList();
+
+        // 都结束了就清除句柄：
+        if (list.filter(f => new Date().getTime() <= new Date(f.endTime.replace(/-/g, '/')).getTime()).length == list.length) {
+            clearInterval(timeHander); // 消除句柄
+        }
+
+        prevTime = Date.now() + diff; // 重设当前时间
+        
+    }, 1000);
+}
+
+```
+
 ### diffTime
 
 > 当前日期时间
