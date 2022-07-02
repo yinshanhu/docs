@@ -36,4 +36,4 @@
   * [redis](plugin.md?id=redis)
 
 * 读书
-  * [invoke](read.md)
+  * [活着](read.md?id=alive)
