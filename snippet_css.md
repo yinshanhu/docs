@@ -117,6 +117,15 @@ input {
 }
 ```
 
+### 图片自动裁剪
+```css
+.product-img {
+    width: 150px;
+    min-height: 150px;
+    object-fit: cover;  /*  图片拉伸的情况下，使用此属性，图片将自动裁剪，不变形  */
+}
+```
+
 ## BaseCss
 
 ```css
