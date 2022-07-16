@@ -2,7 +2,7 @@
 
 ### 扩展方法
 
-```csharp
+```cs
 
 // a.cs
 using Microsoft.EntityFrameworkCore; // ModelBuilder 的命名空间
@@ -38,7 +38,7 @@ namespace xxx {
 
 ### 生成指定长度随机字符
 
-```csharp
+```cs
 public string RandomString(int Length)
 {
     string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
