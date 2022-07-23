@@ -25,7 +25,7 @@
 * 命令
   
   * [linux](command.md?id=linux)
-  * [git](command.md?id=git%20submodule)
+  * [git](git.md)
 
 * 插件
   
