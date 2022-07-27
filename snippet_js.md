@@ -996,6 +996,36 @@ function post(url, data, header = {}, fn) {
 }
 ```
 
+## 文件上传
+
+### 表单实现
+
+```javascript
+var FormData = require('form-data');
+var fs = require('fs');
+
+var form = new FormData();
+form.append('my_file', fs.createReadStream('/foo/bar.jpg'));
+form.submit('example.org/upload', function(err, res) {
+  console.log(res.statusCode);
+});
+```
+
+### 模拟文件流
+
+```javascript
+const string2fileStream = require('string-to-file-stream');
+const FormData = require('form-data');
+
+const form = new FormData();
+const flieContent = 'Oh, my great data!';
+form.append('my_file', string2fileStream(flieContent, { path: 'no-this-file.txt' }));
+form.submit('example.org/upload', function(err, res) {
+  console.log(res.statusCode);
+});
+```
+
+
 ## 界面
 
 ### toast
